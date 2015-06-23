@@ -1,0 +1,40 @@
+PODS:
+  - LGDrawer (1.0.0)
+  - LGFilterView (1.0.0)
+  - LGHelper (1.0.0):
+    - Reachability (~> 3.2)
+  - LGViews (1.0.0):
+    - LGViews/LGButton (= 1.0.0)
+    - LGViews/LGLabel (= 1.0.0)
+    - LGViews/LGTextField (= 1.0.0)
+    - LGViews/LGTextView (= 1.0.0)
+  - LGViews/LGButton (1.0.0)
+  - LGViews/LGLabel (1.0.0)
+  - LGViews/LGTextField (1.0.0)
+  - LGViews/LGTextView (1.0.0)
+  - Reachability (3.2)
+
+DEPENDENCIES:
+  - LGDrawer (from `../../LGDrawer`)
+  - LGFilterView (from `../`)
+  - LGHelper (from `../../LGHelper`)
+  - LGViews (from `../../LGViews`)
+
+EXTERNAL SOURCES:
+  LGDrawer:
+    :path: ../../LGDrawer
+  LGFilterView:
+    :path: ../
+  LGHelper:
+    :path: ../../LGHelper
+  LGViews:
+    :path: ../../LGViews
+
+SPEC CHECKSUMS:
+  LGDrawer: 7ceea97b27a6b23e8eb691210ca180c897025513
+  LGFilterView: c1dc195914d116a9abd580247c45335f313d2f44
+  LGHelper: 68fe43b3000e0472cfce76e58c512778dbdf0ac1
+  LGViews: 694802610de43aece5ff69cd202dd2f5f9e11799
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+
+COCOAPODS: 0.37.2
