@@ -55,23 +55,23 @@ To handle actions you can use initialization methods with blocks or delegate, or
 ```objective-c
 @property (assign, nonatomic) id<LGFilterViewDelegate> delegate;
 
-- (void)filterViewWillShow:(LGFilterView *)actionSheet;
-- (void)filterViewWillDismiss:(LGFilterView *)actionSheet;
-- (void)filterViewDidShow:(LGFilterView *)actionSheet;
-- (void)filterViewDidDismiss:(LGFilterView *)actionSheet;
-- (void)filterView:(LGFilterView *)actionSheet buttonPressedWithTitle:(NSString *)title index:(NSUInteger)index;
-- (void)filterViewCancelled:(LGFilterView *)actionSheet;
+- (void)filterViewWillShow:(LGFilterView *)filterView;
+- (void)filterViewWillDismiss:(LGFilterView *)filterView;
+- (void)filterViewDidShow:(LGFilterView *)filterView;
+- (void)filterViewDidDismiss:(LGFilterView *)filterView;
+- (void)filterView:(LGFilterView *)filterView buttonPressedWithTitle:(NSString *)title index:(NSUInteger)index;
+- (void)filterViewCancelled:(LGFilterView *)filterView;
 ```
 
 #### Blocks
 
 ```objective-c
-@property (strong, nonatomic) void (^willShowHandler)(LGFilterView *actionSheet);
-@property (strong, nonatomic) void (^willDismissHandler)(LGFilterView *actionSheet);
-@property (strong, nonatomic) void (^didShowHandler)(LGFilterView *actionSheet);
-@property (strong, nonatomic) void (^didDismissHandler)(LGFilterView *actionSheet);
-@property (strong, nonatomic) void (^actionHandler)(LGFilterView *actionSheet, NSString *title, NSUInteger index);
-@property (strong, nonatomic) void (^cancelHandler)(LGFilterView *actionSheet);
+@property (strong, nonatomic) void (^willShowHandler)(LGFilterView *filterView);
+@property (strong, nonatomic) void (^willDismissHandler)(LGFilterView *filterView);
+@property (strong, nonatomic) void (^didShowHandler)(LGFilterView *filterView);
+@property (strong, nonatomic) void (^didDismissHandler)(LGFilterView *filterView);
+@property (strong, nonatomic) void (^actionHandler)(LGFilterView *filterView, NSString *title, NSUInteger index);
+@property (strong, nonatomic) void (^cancelHandler)(LGFilterView *filterView);
 ```
 
 #### Notifications
