@@ -94,7 +94,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 #pragma mark -
 
 - (instancetype)initWithView:(UIView *)view
-               cancelHandler:(void(^)(LGFilterView *actionSheet))cancelHandler
+               cancelHandler:(void(^)(LGFilterView *filterView))cancelHandler
 {
     self = [self initWithView:view];
     if (self)
@@ -105,8 +105,8 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 }
 
 - (instancetype)initWithTitles:(NSArray *)titles
-                 actionHandler:(void(^)(LGFilterView *actionSheet, NSString *title, NSUInteger index))actionHandler
-                 cancelHandler:(void(^)(LGFilterView *actionSheet))cancelHandler
+                 actionHandler:(void(^)(LGFilterView *filterView, NSString *title, NSUInteger index))actionHandler
+                 cancelHandler:(void(^)(LGFilterView *filterView))cancelHandler
 {
     self = [self initWithTitles:titles];
     if (self)
@@ -118,15 +118,15 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 }
 
 + (instancetype)filterViewWithView:(UIView *)view
-                     cancelHandler:(void(^)(LGFilterView *actionSheet))cancelHandler
+                     cancelHandler:(void(^)(LGFilterView *filterView))cancelHandler
 {
     return [[self alloc] initWithView:view
                         cancelHandler:cancelHandler];
 }
 
 + (instancetype)filterViewWithTitles:(NSArray *)titles
-                       actionHandler:(void(^)(LGFilterView *actionSheet, NSString *title, NSUInteger index))actionHandler
-                       cancelHandler:(void(^)(LGFilterView *actionSheet))cancelHandler
+                       actionHandler:(void(^)(LGFilterView *filterView, NSString *title, NSUInteger index))actionHandler
+                       cancelHandler:(void(^)(LGFilterView *filterView))cancelHandler
 {
     return [[self alloc] initWithTitles:titles
                           actionHandler:actionHandler

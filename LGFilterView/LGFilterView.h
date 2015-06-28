@@ -43,12 +43,12 @@ static CGFloat const kLGFilterViewWidth       = (320.f-kLGFilterViewWidthMargin*
 
 @optional
 
-- (void)filterViewWillShow:(LGFilterView *)actionSheet;
-- (void)filterViewWillDismiss:(LGFilterView *)actionSheet;
-- (void)filterViewDidShow:(LGFilterView *)actionSheet;
-- (void)filterViewDidDismiss:(LGFilterView *)actionSheet;
-- (void)filterView:(LGFilterView *)actionSheet buttonPressedWithTitle:(NSString *)title index:(NSUInteger)index;
-- (void)filterViewCancelled:(LGFilterView *)actionSheet;
+- (void)filterViewWillShow:(LGFilterView *)filterView;
+- (void)filterViewWillDismiss:(LGFilterView *)filterView;
+- (void)filterViewDidShow:(LGFilterView *)filterView;
+- (void)filterViewDidDismiss:(LGFilterView *)filterView;
+- (void)filterView:(LGFilterView *)filterView buttonPressedWithTitle:(NSString *)title index:(NSUInteger)index;
+- (void)filterViewCancelled:(LGFilterView *)filterView;
 
 @end
 
@@ -96,18 +96,18 @@ LGFilterViewTransitionStyle;
 @property (assign, nonatomic) UIScrollViewIndicatorStyle indicatorStyle;
 
 /** Do not forget about weak referens to self */
-@property (strong, nonatomic) void (^willShowHandler)(LGFilterView *actionSheet);
+@property (strong, nonatomic) void (^willShowHandler)(LGFilterView *filterView);
 /** Do not forget about weak referens to self */
-@property (strong, nonatomic) void (^willDismissHandler)(LGFilterView *actionSheet);
+@property (strong, nonatomic) void (^willDismissHandler)(LGFilterView *filterView);
 /** Do not forget about weak referens to self */
-@property (strong, nonatomic) void (^didShowHandler)(LGFilterView *actionSheet);
+@property (strong, nonatomic) void (^didShowHandler)(LGFilterView *filterView);
 /** Do not forget about weak referens to self */
-@property (strong, nonatomic) void (^didDismissHandler)(LGFilterView *actionSheet);
+@property (strong, nonatomic) void (^didDismissHandler)(LGFilterView *filterView);
 
 /** Do not forget about weak referens to self */
-@property (strong, nonatomic) void (^actionHandler)(LGFilterView *actionSheet, NSString *title, NSUInteger index);
+@property (strong, nonatomic) void (^actionHandler)(LGFilterView *filterView, NSString *title, NSUInteger index);
 /** Do not forget about weak referens to self */
-@property (strong, nonatomic) void (^cancelHandler)(LGFilterView *actionSheet);
+@property (strong, nonatomic) void (^cancelHandler)(LGFilterView *filterView);
 
 @property (assign, nonatomic) id<LGFilterViewDelegate> delegate;
 
@@ -126,24 +126,24 @@ LGFilterViewTransitionStyle;
  Do not forget about weak referens to self for cancelHandler blocks
  */
 - (instancetype)initWithView:(UIView *)view
-               cancelHandler:(void(^)(LGFilterView *actionSheet))cancelHandler;
+               cancelHandler:(void(^)(LGFilterView *filterView))cancelHandler;
 
 /** Do not forget about weak referens to self for actionHandler and cancelHandler blocks */
 - (instancetype)initWithTitles:(NSArray *)titles
-                 actionHandler:(void(^)(LGFilterView *actionSheet, NSString *title, NSUInteger index))actionHandler
-                 cancelHandler:(void(^)(LGFilterView *actionSheet))cancelHandler;
+                 actionHandler:(void(^)(LGFilterView *filterView, NSString *title, NSUInteger index))actionHandler
+                 cancelHandler:(void(^)(LGFilterView *filterView))cancelHandler;
 
 /**
  View can not be subclass of UIScrollView
  Do not forget about weak referens to self for cancelHandler blocks
  */
 + (instancetype)filterViewWithView:(UIView *)view
-                     cancelHandler:(void(^)(LGFilterView *actionSheet))cancelHandler;
+                     cancelHandler:(void(^)(LGFilterView *filterView))cancelHandler;
 
 /** Do not forget about weak referens to self for actionHandler and cancelHandler blocks */
 + (instancetype)filterViewWithTitles:(NSArray *)titles
-                       actionHandler:(void(^)(LGFilterView *actionSheet, NSString *title, NSUInteger index))actionHandler
-                       cancelHandler:(void(^)(LGFilterView *actionSheet))cancelHandler;
+                       actionHandler:(void(^)(LGFilterView *filterView, NSString *title, NSUInteger index))actionHandler
+                       cancelHandler:(void(^)(LGFilterView *filterView))cancelHandler;
 
 #pragma mark -
 

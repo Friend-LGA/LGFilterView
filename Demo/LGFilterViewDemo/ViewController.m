@@ -186,7 +186,7 @@
     __weak typeof(self) wself = self;
     
     _filterView1 = [[LGFilterView alloc] initWithTitles:_titlesArray
-                                          actionHandler:^(LGFilterView *actionSheet, NSString *title, NSUInteger index)
+                                          actionHandler:^(LGFilterView *filterView, NSString *title, NSUInteger index)
                     {
                         if (wself)
                         {
