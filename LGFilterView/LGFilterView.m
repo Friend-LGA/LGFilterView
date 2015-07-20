@@ -301,7 +301,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     {
         [self getParametersFromPresentation];
         
-        [LGFilterView animateStandartWithAnimations:^(void)
+        [LGFilterView animateStandardWithAnimations:^(void)
          {
              [self showAnimations];
          }
@@ -379,7 +379,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     {
         [self getParametersFromPresentation];
         
-        [LGFilterView animateStandartWithAnimations:^(void)
+        [LGFilterView animateStandardWithAnimations:^(void)
          {
              [self dismissAnimations];
          }
@@ -772,7 +772,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 
 #pragma mark - Support
 
-+ (void)animateStandartWithAnimations:(void(^)())animations completion:(void(^)(BOOL finished))completion
++ (void)animateStandardWithAnimations:(void(^)())animations completion:(void(^)(BOOL finished))completion
 {
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0)
     {
