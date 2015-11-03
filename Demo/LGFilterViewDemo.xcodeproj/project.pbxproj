@@ -114,6 +114,7 @@
 				4A6355ED1AC96C0800F51478 /* Frameworks */,
 				4A6355EE1AC96C0800F51478 /* Resources */,
 				DEF299DBDC6F9720C69407A9 /* Copy Pods Resources */,
+				F762EBA064DAB0327FF47B67 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,6 +197,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LGFilterViewDemo/Pods-LGFilterViewDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F762EBA064DAB0327FF47B67 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LGFilterViewDemo/Pods-LGFilterViewDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
