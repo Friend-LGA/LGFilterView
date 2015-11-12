@@ -54,12 +54,11 @@ static CGFloat const kLGFilterViewWidth       = (320.f-kLGFilterViewWidthMargin*
 
 @interface LGFilterView : UIView
 
-typedef enum
+typedef NS_ENUM(NSUInteger, LGFilterViewTransitionStyle)
 {
     LGFilterViewTransitionStyleTop    = 0,
     LGFilterViewTransitionStyleCenter = 1
-}
-LGFilterViewTransitionStyle;
+};
 
 @property (assign, nonatomic) LGFilterViewTransitionStyle transitionStyle;
 
