@@ -7,18 +7,21 @@
 //
 
 #import "AppDelegate.h"
+#import "NavigationController.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.navigationController = [NavigationController new];
-    
+    ViewController *viewController = [ViewController new];
+    NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:viewController];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = self.navigationController;
+    self.window.rootViewController = navigationController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
 

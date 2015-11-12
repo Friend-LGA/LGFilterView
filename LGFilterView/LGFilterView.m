@@ -59,11 +59,11 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     {
         if ([view isKindOfClass:[UIScrollView class]])
             NSLog(@"LGFilterView: WARNING !!! view can not be subclass of UIScrollView !!!");
-        
+
         // -----
-        
+
         _innerView = view;
-        
+
         [self setupDefaults];
     }
     return self;
@@ -75,7 +75,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     if (self)
     {
         _titles = titles;
-        
+
         [self setupDefaults];
     }
     return self;
@@ -174,43 +174,43 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)setupDefaults
 {
     _transitionStyle = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? LGFilterViewTransitionStyleTop : LGFilterViewTransitionStyleCenter);
-    
+
     _selectedIndex = -1;
-    
+
     _separatorsVisible = YES;
     _separatorsColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.f];
     _separatorsEdgeInsets = UIEdgeInsetsMake(0.f, 10.f, 0.f, 10.f);
-    
+
     _titleColor = [UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f];
     _titleColorHighlighted = [UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f];
     _titleColorSelected = [UIColor whiteColor];
-    
+
     self.backgroundColor = [UIColor whiteColor];
     _backgroundColorHighlighted = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.f];
     _backgroundColorSelected = [UIColor colorWithRed:0.f green:0.5 blue:1.f alpha:1.f];
-    
+
     _font = [UIFont systemFontOfSize:20.f];
     _numberOfLines = 1;
     _lineBreakMode = NSLineBreakByTruncatingMiddle;
     _textAlignment = NSTextAlignmentCenter;
     _adjustsFontSizeToFitWidth = YES;
     _minimumScaleFactor = 14.f/20.f;
-    
+
     _cornerRadius = 5.f;
     _borderColor = nil;
     _borderWidth = 0.f;
-    
+
     _indicatorStyle = UIScrollViewIndicatorStyleBlack;
-    
+
     // -----
-    
+
     _backgroundView = [UIView new];
     _backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     _backgroundView.alpha = 0.f;
     [self addSubview:_backgroundView];
-    
+
     // -----
-    
+
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelAction)];
     tapGesture.delegate = self;
     [_backgroundView addGestureRecognizer:tapGesture];
@@ -230,7 +230,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
     [super willMoveToSuperview:newSuperview];
-    
+
     if (!newSuperview)
         [self removeObservers];
     else
@@ -242,9 +242,9 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)setBackgroundColor:(UIColor *)backgroundColor
 {
     [super setBackgroundColor:[UIColor clearColor]];
-    
+
     _backgroundColorNormal = backgroundColor;
-    
+
     if (_tableView)
         _tableView.backgroundColor = backgroundColor;
     else if (_scrollView)
@@ -256,7 +256,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     if (!UIEdgeInsetsEqualToEdgeInsets(_contentInset, contentInset))
     {
         _contentInset = contentInset;
-        
+
         [self layoutInvalidate];
     }
 }
@@ -266,7 +266,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     if (!CGPointEqualToPoint(_offset, offset))
     {
         _offset = offset;
-        
+
         [self layoutInvalidate];
     }
 }
@@ -278,29 +278,29 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
  completionHandler:(void(^)())completionHandler;
 {
     if (self.isShowing) return;
-    
+
     _parentView = view;
-    
+
     [self subviewsInvalidate];
     [self layoutInvalidate];
-    
+
     _showing = YES;
-    
+
     // -----
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kLGFilterViewWillShowNotification object:self userInfo:nil];
-    
+
     if (_willShowHandler) _willShowHandler(self);
-    
+
     if (_delegate && [_delegate respondsToSelector:@selector(filterViewWillShow:)])
         [_delegate filterViewWillShow:self];
-    
+
     // -----
-    
+
     if (animated)
     {
         [self getParametersFromPresentation];
-        
+
         [LGFilterView animateStandardWithAnimations:^(void)
          {
              [self showAnimations];
@@ -310,18 +310,18 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
              if (finished)
              {
                  [self showComplete];
-                 
+
                  if (completionHandler) completionHandler();
              }
          }];
-        
+
     }
     else
     {
         [self showAnimations];
-        
+
         [self showComplete];
-        
+
         if (completionHandler) completionHandler();
     }
 }
@@ -329,16 +329,16 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)showAnimations
 {
     UIScrollView *scrollView = nil;
-    
+
     if (_tableView)
         scrollView = _tableView;
     else if (_scrollView)
         scrollView = _scrollView;
-    
+
     // -----
-    
+
     _backgroundView.alpha = 1.f;
-    
+
     if (_transitionStyle == LGFilterViewTransitionStyleCenter)
     {
         scrollView.transform = CGAffineTransformIdentity;
@@ -350,9 +350,9 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)showComplete
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kLGFilterViewDidShowNotification object:self userInfo:nil];
-    
+
     if (_didShowHandler) _didShowHandler(self);
-    
+
     if (_delegate && [_delegate respondsToSelector:@selector(filterViewDidShow:)])
         [_delegate filterViewDidShow:self];
 }
@@ -363,22 +363,22 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
       completionHandler:(void(^)())completionHandler
 {
     if (!self.isShowing) return;
-    
+
     _showing = NO;
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kLGFilterViewWillDismissNotification object:self userInfo:nil];
-    
+
     if (_willDismissHandler) _willDismissHandler(self);
-    
+
     if (_delegate && [_delegate respondsToSelector:@selector(filterViewWillDismiss:)])
         [_delegate filterViewWillDismiss:self];
-    
+
     // -----
-    
+
     if (animated)
     {
         [self getParametersFromPresentation];
-        
+
         [LGFilterView animateStandardWithAnimations:^(void)
          {
              [self dismissAnimations];
@@ -388,7 +388,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
              if (finished)
              {
                  [self dismissComplete];
-                 
+
                  if (completionHandler) completionHandler();
              }
          }];
@@ -396,9 +396,9 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     else
     {
         [self dismissAnimations];
-        
+
         [self dismissComplete];
-        
+
         if (completionHandler) completionHandler();
     }
 }
@@ -406,16 +406,16 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)dismissAnimations
 {
     UIScrollView *scrollView = nil;
-    
+
     if (_tableView)
         scrollView = _tableView;
     else if (_scrollView)
         scrollView = _scrollView;
-    
+
     // -----
-    
+
     _backgroundView.alpha = 0.f;
-    
+
     if (_transitionStyle == LGFilterViewTransitionStyleCenter)
     {
         scrollView.transform = CGAffineTransformMakeScale(0.9, 0.9);
@@ -427,13 +427,13 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)dismissComplete
 {
     [self removeFromSuperview];
-    
+
     // -----
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kLGFilterViewDidDismissNotification object:self userInfo:nil];
-    
+
     if (_didDismissHandler) _didDismissHandler(self);
-    
+
     if (_delegate && [_delegate respondsToSelector:@selector(filterViewDidDismiss:)])
         [_delegate filterViewDidDismiss:self];
 }
@@ -453,7 +453,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LGFilterViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
+
     cell.title                      = _titles[indexPath.row];
     cell.titleColor                 = _titleColor;
     cell.titleColorHighlighted      = _titleColorHighlighted;
@@ -469,7 +469,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     cell.lineBreakMode              = _lineBreakMode;
     cell.adjustsFontSizeToFitWidth  = _adjustsFontSizeToFitWidth;
     cell.minimumScaleFactor         = _minimumScaleFactor;
-    
+
     return cell;
 }
 
@@ -480,7 +480,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     if (_numberOfLines == 0)
     {
         NSString *title = _titles[indexPath.row];
-        
+
         UILabel *label = [UILabel new];
         label.text                      = title;
         label.textAlignment             = _textAlignment;
@@ -489,14 +489,14 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
         label.lineBreakMode             = _lineBreakMode;
         label.adjustsFontSizeToFitWidth = _adjustsFontSizeToFitWidth;
         label.minimumScaleFactor        = _minimumScaleFactor;
-        
+
         CGSize size = [label sizeThatFits:CGSizeMake(tableView.frame.size.width-kLGFilterViewInnerMarginW*2, CGFLOAT_MAX)];
-        
+
         size.height += kLGFilterViewInnerMarginH*2;
-        
+
         if (size.height < 44.f)
             size.height = 44.f;
-        
+
         return size.height;
     }
     else return 44.f;
@@ -511,14 +511,14 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     else
     {
         [self dismissAnimated:YES completionHandler:nil];
-        
+
         _selectedIndex = indexPath.row;
-        
+
         NSString *title = _titles[indexPath.row];
         NSUInteger index = indexPath.row;
-        
+
         if (_actionHandler) _actionHandler(self, title, index);
-        
+
         if (_delegate && [_delegate respondsToSelector:@selector(filterView:buttonPressedWithTitle:index:)])
             [_delegate filterView:self buttonPressedWithTitle:title index:index];
     }
@@ -540,10 +540,10 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
             [_tableView registerClass:[LGFilterViewCell class] forCellReuseIdentifier:@"cell"];
             [self addSubview:_tableView];
         }
-        
+
         _tableView.backgroundColor = _backgroundColorNormal;
         _tableView.indicatorStyle = _indicatorStyle;
-        
+
         if (_transitionStyle == LGFilterViewTransitionStyleCenter)
         {
             _tableView.layer.masksToBounds = YES;
@@ -551,7 +551,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
             _tableView.layer.borderColor = _borderColor.CGColor;
             _tableView.layer.borderWidth = _borderWidth;
         }
-        
+
         [_tableView reloadData];
     }
     else if (_innerView)
@@ -563,10 +563,10 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
             [_scrollView addSubview:_innerView];
             [self addSubview:_scrollView];
         }
-        
+
         _scrollView.backgroundColor = _backgroundColorNormal;
         _scrollView.indicatorStyle = _indicatorStyle;
-        
+
         if (_transitionStyle == LGFilterViewTransitionStyleCenter)
         {
             _scrollView.layer.masksToBounds = YES;
@@ -575,7 +575,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
             _scrollView.layer.borderWidth = _borderWidth;
         }
     }
-    
+
     if (!self.superview)
         [_parentView addSubview:self];
 }
@@ -584,37 +584,37 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 {
     self.frame = CGRectMake(0.f, 0.f, _parentView.frame.size.width, _parentView.frame.size.height);
     _backgroundView.frame = CGRectMake(0.f, 0.f, self.frame.size.width, self.frame.size.height);
-    
+
     // -----
-    
+
     UIScrollView *scrollView = nil;
-    
+
     if (_tableView)
         scrollView = _tableView;
     else if (_scrollView)
         scrollView = _scrollView;
-    
+
     scrollView.contentInset = _contentInset;
     scrollView.scrollIndicatorInsets = _contentInset;
-    
+
     if (_transitionStyle == LGFilterViewTransitionStyleCenter)
     {
         scrollView.transform = CGAffineTransformIdentity;
         scrollView.alpha = 1.f;
     }
-    
+
     // -----
-    
+
     CGFloat scrollViewHeight = _contentInset.top+_contentInset.bottom;
-    
+
     if (_tableView)
         scrollViewHeight += _tableView.contentSize.height;
     else if (_scrollView)
         scrollViewHeight += _innerView.frame.size.height;
-    
+
     if (_parentView.frame.size.height < scrollViewHeight)
         scrollViewHeight = _parentView.frame.size.height;
-    
+
     if (_heightMax)
     {
         if (_heightMax < scrollViewHeight)
@@ -625,11 +625,11 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
         if (_parentView.frame.size.height*0.5 < scrollViewHeight)
             scrollViewHeight = _parentView.frame.size.height*0.5;
     }
-    
+
     // -----
-    
+
     CGRect scrollViewFrame = CGRectZero;
-    
+
     if (_transitionStyle == LGFilterViewTransitionStyleCenter)
         scrollViewFrame = CGRectMake(_parentView.frame.size.width/2-kLGFilterViewWidth/2,
                                      _parentView.frame.size.height/2-scrollViewHeight/2+_offset.y,
@@ -637,19 +637,19 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
                                      scrollViewHeight);
     else
         scrollViewFrame = CGRectMake(0.f, 0.f, self.frame.size.width, scrollViewHeight);
-    
+
     if ([UIScreen mainScreen].scale == 1.f)
         scrollViewFrame = CGRectIntegral(scrollViewFrame);
-    
+
     // -----
-    
+
     if (!self.isShowing && _transitionStyle == LGFilterViewTransitionStyleTop)
         scrollViewFrame.origin.y -= scrollViewFrame.size.height;
-    
+
     scrollView.frame = scrollViewFrame;
-    
+
     // -----
-    
+
     if (_tableView)
     {
         if (_selectedIndex >= 0)
@@ -659,15 +659,15 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
             else
             {
                 [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
-                
+
                 CGRect rect = [_tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:_selectedIndex inSection:0]];
-                
+
                 CGFloat offsetY = rect.origin.y+rect.size.height/2-_tableView.frame.size.height/2-_tableView.contentInset.top/2;
                 if (offsetY < -_tableView.contentInset.top)
                     offsetY = -_tableView.contentInset.top;
                 else if (offsetY > _tableView.contentSize.height-_tableView.frame.size.height)
                     offsetY = _tableView.contentSize.height-_tableView.frame.size.height;
-                
+
                 _tableView.contentOffset = CGPointMake(_tableView.contentOffset.x, offsetY);
             }
         }
@@ -676,17 +676,17 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     else if (_scrollView)
     {
         _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _innerView.frame.size.height);
-        
+
         // -----
-        
+
         CGRect viewFrame = CGRectMake(_scrollView.frame.size.width/2-_innerView.frame.size.width/2, 0.f, _innerView.frame.size.width, _innerView.frame.size.height);
-        
+
         if ([UIScreen mainScreen].scale == 1.f)
             viewFrame = CGRectIntegral(viewFrame);
-        
+
         _innerView.frame = viewFrame;
     }
-    
+
     if (!self.isShowing && _transitionStyle == LGFilterViewTransitionStyleCenter)
     {
         scrollView.transform = CGAffineTransformMakeScale(1.2, 1.2);
@@ -697,30 +697,30 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)getParametersFromPresentation
 {
     UIScrollView *scrollView = nil;
-    
+
     if (_tableView)
         scrollView = _tableView;
     else if (_scrollView)
         scrollView = _scrollView;
-    
+
     // -----
-    
+
     if (_backgroundView.layer.animationKeys.count && scrollView.layer.animationKeys.count)
     {
         _backgroundView.alpha = [(CALayer *)_backgroundView.layer.presentationLayer opacity];
-        
+
         if (_transitionStyle == LGFilterViewTransitionStyleCenter)
         {
             CGFloat scaleX = [[(CALayer *)scrollView.layer.presentationLayer valueForKeyPath:@"transform.scale.x"] floatValue];
             CGFloat scaleY = [[(CALayer *)scrollView.layer.presentationLayer valueForKeyPath:@"transform.scale.y"] floatValue];
-            
+
             if (scaleX && scaleY)
                 scrollView.transform = CGAffineTransformMakeScale(scaleX, scaleY);
-            
+
             scrollView.alpha = [(CALayer *)scrollView.layer.presentationLayer opacity];
         }
         else scrollView.center = [(CALayer *)scrollView.layer.presentationLayer position];
-        
+
         [_backgroundView.layer removeAllAnimations];
         [scrollView.layer removeAllAnimations];
     }
@@ -731,11 +731,11 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
 - (void)cancelAction
 {
     [self dismissAnimated:YES completionHandler:nil];
-    
+
     // -----
-    
+
     if (_cancelHandler) _cancelHandler(self);
-    
+
     if (_delegate && [_delegate respondsToSelector:@selector(filterViewCancelled:)])
         [_delegate filterViewCancelled:self];
 }
@@ -747,7 +747,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     if (!self.isObserversAdded && _parentView)
     {
         _observersAdded = YES;
-        
+
         [_parentView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
     }
 }
@@ -757,7 +757,7 @@ static CGFloat const kLGFilterViewInnerMarginH = 5.f;
     if (self.isObserversAdded && _parentView)
     {
         _observersAdded = NO;
-        
+
         [_parentView removeObserver:self forKeyPath:@"frame"];
     }
 }
