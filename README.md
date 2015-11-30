@@ -4,11 +4,11 @@ View shows and applies different filters in iOS app.
 
 ## Preview
 
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/Preview.gif" width="226"/>
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/1.png" width="226"/>
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/2.png" width="226"/>
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/3.png" width="226"/>
-<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/4.png" width="226"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/Preview.gif" width="218"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/1.png" width="218"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/2.png" width="218"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/3.png" width="218"/>
+<img src="https://raw.githubusercontent.com/Friend-LGA/ReadmeFiles/master/LGFilterView/4.png" width="218"/>
 
 ## Installation
 
